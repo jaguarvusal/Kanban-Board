@@ -1,3 +1,4 @@
+-- Active: 1745021298193@@127.0.0.1@5432@postgres
 -- DROP DATABASE
 DROP DATABASE IF EXISTS kanban_db;
 
