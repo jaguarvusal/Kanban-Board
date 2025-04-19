@@ -6,20 +6,18 @@ import { UserData } from '../interfaces/UserData';
 import { retrieveUsers } from '../api/userAPI';
 
 const CreateTicket = () => {
-  const [newTicket, setNewTicket] = useState<TicketData | undefined>(
-    {
-      id: 0,
-      name: '',
-      description: '',
-      status: 'Todo',
-      assignedUserId: 1,
-      assignedUser: null
-    }
-  );
+  const [newTicket, setNewTicket] = useState<TicketData | undefined>({
+    id: 0,
+    name: '',
+    description: '',
+    status: 'Todo',
+    assignedUserId: null,
+    assignedUser: null,
+  });
 
   const navigate = useNavigate();
 
-  const [users, setUsers] = useState<UserData[] | undefined>([]);
+  const [_users, setUsers] = useState<UserData[] | undefined>([]);
 
   const getAllUsers = async () => {
     try {
@@ -53,16 +51,10 @@ const CreateTicket = () => {
     setNewTicket((prev) => (prev ? { ...prev, [name]: value } : undefined));
   }
 
-  const handleUserChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setNewTicket((prev) => (prev ? { ...prev, [name]: value } : undefined));
-  }
-
   return (
     <>
       <div className='container'>
-        <form className='form' onSubmit=
-        {handleSubmit}>
+        <form className='form create-ticket-form' onSubmit={handleSubmit}>
           <h1>Create Ticket</h1>
           <label htmlFor='tName'>Ticket Name</label>
           <textarea 
@@ -70,7 +62,7 @@ const CreateTicket = () => {
             name='name'
             value={newTicket?.name || ''}
             onChange={handleTextAreaChange}
-            />
+          />
           <label htmlFor='tStatus'>Ticket Status</label>
           <select 
             name='status' 
@@ -89,28 +81,6 @@ const CreateTicket = () => {
             value={newTicket?.description || ''}
             onChange={handleTextAreaChange}
           />
-          <label htmlFor='tUserId'>User's ID</label>
-          <select
-            name='assignedUserId'
-            value={newTicket?.assignedUserId || ''}
-            onChange={handleUserChange}
-          >
-            {users ? users.map((user) => {
-              return (
-                <option key={user.id} value={String(user.id)}>
-                  {user.username}
-                </option>
-              )
-            }) : (
-            <textarea 
-              id='tUserId'
-              name='assignedUserId'
-              value={newTicket?.assignedUserId || 0}
-              onChange={handleTextAreaChange}
-            />
-            )
-          }
-          </select>
           <button type='submit' onSubmit={handleSubmit}>Submit Form</button>
         </form>
       </div>

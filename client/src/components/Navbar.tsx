@@ -30,11 +30,18 @@ const Navbar = () => {
             </button>
           </li>
         ) : (
-          <li className='nav-item'>
-            <button type='button' onClick={() => {
-              auth.logout();
-            }}>Logout</button>
-          </li>
+          <>
+            <li className='nav-item'>
+              <button type='button'>
+                <Link to='/create'>New Ticket</Link>
+              </button>
+            </li>
+            <li className='nav-item'>
+              <button type='button' onClick={() => {
+                auth.logout();
+              }}>Logout</button>
+            </li>
+          </>
         )
       }
       </ul>

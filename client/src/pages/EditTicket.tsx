@@ -49,7 +49,7 @@ const EditTicket = () => {
       <div className='container'>
         {
           ticket ? (
-            <form className='form' onSubmit={handleSubmit}>
+            <form className='form edit-ticket-form' onSubmit={handleSubmit}>
               <h1>Edit Ticket</h1>
               <label htmlFor='tName'>Ticket Name</label>
               <textarea

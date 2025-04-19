@@ -1,9 +1,9 @@
-import jwtDecode, { JwtPayload } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // Correct named import
 
 class AuthService {
   getProfile() {
     const token = this.getToken();
-    return token ? jwtDecode<JwtPayload>(token) : null;
+    return token ? jwtDecode(token) : null; // Decode the token
   }
 
   loggedIn() {
@@ -13,7 +13,7 @@ class AuthService {
 
   isTokenExpired(token: string) {
     try {
-      const decoded = jwtDecode<JwtPayload>(token);
+      const decoded: { exp?: number } = jwtDecode(token); // Explicitly define the type
       if (decoded.exp) {
         return decoded.exp * 1000 < Date.now();
       }

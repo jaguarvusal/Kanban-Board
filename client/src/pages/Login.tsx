@@ -29,16 +29,16 @@ const Login = () => {
 
   return (
     <div className='container'>
-      <form className='form' onSubmit={handleSubmit}>
+      <form className='form login-form' onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <label >Username</label>
+        <label>Username</label>
         <input 
           type='text'
           name='username'
           value={loginData.username || ''}
           onChange={handleChange}
         />
-      <label>Password</label>
+        <label>Password</label>
         <input 
           type='password'
           name='password'
@@ -48,7 +48,6 @@ const Login = () => {
         <button type='submit'>Submit Form</button>
       </form>
     </div>
-    
   )
 };
 

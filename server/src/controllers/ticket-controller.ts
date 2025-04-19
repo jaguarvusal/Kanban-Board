@@ -45,12 +45,30 @@ export const getTicketById = async (req: Request, res: Response) => {
 
 // POST /tickets
 export const createTicket = async (req: Request, res: Response) => {
-  const { name, status, description, assignedUserId } = req.body;
+  const { name, status, description } = req.body;
+
   try {
-    const newTicket = await Ticket.create({ name, status, description, assignedUserId });
-    res.status(201).json(newTicket);
+    if (!req.user || !req.user.username) {
+      return res.status(401).json({ message: 'Unauthorized: User not logged in' });
+    }
+
+    // Find the logged-in user by username
+    const user = await User.findOne({ where: { username: req.user.username } });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Create the ticket with the logged-in user's ID
+    const newTicket = await Ticket.create({
+      name,
+      status,
+      description,
+      assignedUserId: user.id, // Automatically assign the logged-in user
+    });
+
+    return res.status(201).json(newTicket); // Explicit return
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message }); // Ensure all paths return
   }
 };
 

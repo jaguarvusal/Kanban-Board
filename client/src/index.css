@@ -94,6 +94,7 @@ tbody tr:nth-child(odd) {
   display: flex;
   margin-left: auto;
   flex-direction: row;
+  gap: 15px; /* Add spacing between buttons */
 }
 
 .nav-title {
@@ -119,6 +120,20 @@ tbody tr:nth-child(odd) {
   text-decoration: none;
 }
 
+.nav-item button {
+  color: white; /* Change button text color to white */
+}
+
+/* Ensure button text inside nav-item is white */
+.nav-item button a {
+  color: white; /* Set the text color to white */
+  text-decoration: none; /* Ensure no underline */
+}
+
+.nav-item button a:hover {
+  color: #b864c4; /* Optional: Add hover effect for better UX */
+}
+
 .active {
   font-weight: 700;
 }
@@ -140,10 +155,12 @@ tbody tr:nth-child(odd) {
   text-align: center;
   font-weight: 500;
   width: 33%;
-  height: 90vh; 
+  min-height: 90vh; /* Changed from fixed height to minimum height */
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin: 5px;
   padding: 5px;
+  display: flex;
+  flex-direction: column; /* Ensure tickets stack vertically */
 }
 
 .todo {
@@ -179,9 +196,16 @@ tbody tr:nth-child(odd) {
   margin-left: auto;
 }
 
+.board-header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
 
 .form {
-  width: 60%;
+  width: 80%; /* Increased width from 60% to 80% */
+  max-width: 800px; /* Added a max-width for better responsiveness */
   height: 80%;
   background-color: #b864c4;
   margin: auto;
@@ -196,8 +220,37 @@ tbody tr:nth-child(odd) {
 }
 
 .form > input {
-  width: 200px;
-  
+  width: 100%; /* Make the input fields take the full width of the form */
+  max-width: 600px; /* Add a max-width for responsiveness */
+  padding: 10px; /* Increase padding for a bigger appearance */
+  font-size: 1.2em; /* Increase font size */
+}
+
+/* Login form input fields - narrower */
+.form.login-form > input {
+  width: 50%; /* Make the input fields narrower */
+  max-width: 300px; /* Add a max-width for responsiveness */
+  padding: 8px; /* Slightly smaller padding */
+  font-size: 1em; /* Adjust font size */
+}
+
+/* Login form title color */
+.form.login-form > h1 {
+  color: white; /* Change the title color to white */
+}
+
+/* Edit Ticket form input fields - slightly narrower */
+.form.edit-ticket-form > textarea,
+.form.edit-ticket-form > select {
+  width: 90%; /* Reduced width from 100% to 90% */
+  max-width: 650px; /* Adjusted max-width for responsiveness */
+  padding: 12px; /* Keep padding for a comfortable appearance */
+  font-size: 1.2em; /* Keep font size for readability */
+}
+
+/* New Ticket form title color */
+.form.create-ticket-form > h1 {
+  color: white; /* Change the title color to white */
 }
 
 .form > label {
